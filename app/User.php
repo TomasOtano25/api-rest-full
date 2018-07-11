@@ -16,6 +16,8 @@ class User extends Authenticatable
     const USUARIO_ADMINISTRADOR = 'true';
     const USUARIO_REGULAR = 'false ';
 
+    protected $table = 'users'; // Debido a la herencia de seller y buyer
+
     protected $fillable = [
         'name', 
         'email', 
@@ -44,7 +46,7 @@ class User extends Authenticatable
         return $this->admin == User::USUARIO_ADMINISTRADOR;
     }
 
-    public static function generateToken() {
+    public static function generateVerificationToken() {
         return str_random(40); // 24-...
     }
 }

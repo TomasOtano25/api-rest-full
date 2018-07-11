@@ -17,3 +17,11 @@ php artisan make:migration create_category_product_table --create=category_produ
 - Product
 - Transaction
 - Category
+
+## Creacion del archivo DatabaseSeeder
+
+> El fin de este archivo es insertar datos en mis tablas de forma aleatoria para la realizacion de pruebas
+
+php artisan db:seed
+
+php artisan migrate:refresh --seed
