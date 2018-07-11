@@ -2,10 +2,11 @@
 
 namespace App\Traits;
 
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Collection;
+use Illuminate\Database\Eloquent\Model;
 
 
-trait ApiResponser // Trait
+trait ApiResponser //   
 {
     private function successResponse($data, $code) {
         return response()->json($data, $code);
@@ -23,3 +24,4 @@ trait ApiResponser // Trait
         return response()->json(['data' => $instance], $code);
     }
 }
+

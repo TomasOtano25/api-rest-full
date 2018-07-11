@@ -24,7 +24,8 @@ class UserController extends ApiController
         $users = $this->user->getAll();
         //$users = User::all();
         //return $users;
-        return response()->json(['data' => $users], 200);
+        //return response()->json(['data' => $users], 200);
+        return $this->showAll($users, 200);
 
     }
 
@@ -54,7 +55,8 @@ class UserController extends ApiController
 
         $user = $this->user->create($fields);
 
-        return response()->json(['data' => $user], 201);
+        //return response()->json(['data' => $user], 201);
+        return $this->showOne($user, 201);
     }
 
     /**
@@ -67,7 +69,8 @@ class UserController extends ApiController
     {
         $user = $this->user->getUser($id);
         
-        return response()->json(['data' => $user], 200);
+        //return response()->json(['data' => $user], 200);
+        return $this->showOne($user, 200);
     }
 
     /**
@@ -102,24 +105,28 @@ class UserController extends ApiController
         }
         if($request->has('admin')) {
             if(!$user->isVerified()) {
-                return response()->json(['error' => 'Unicamente los usuarios verificados pueden cambiar su valor de administrador', 'code'=> 409], 409);
+                return $this->errorReponse('Unicamente los usuarios verificados pueden cambiar su valor de administrador', 409);
+                // return response()->json(['error' => 'Unicamente los usuarios verificados pueden cambiar su valor de administrador', 'code'=> 409], 409);
             }
             $user->admin = $request->admin;
         }
 
         if(!$user->isDirty()) { // determina si hubo cambios en el metodo
-            return response()->json(['error' => 'Se debe especificar al meno un valor diferente para actualizar', 'code'=> 422], 422);
+            return $this->errorResponse('Se debe especificar al meno un valor diferente para actualizar', 422);
+            // return response()->json(['error' => 'Se debe especificar al meno un valor diferente para actualizar', 'code'=> 422], 422);
         }
 
         $user->save();
 
-        return response()->json(['data' => $user], 200);
+        //return response()->json(['data' => $user], 200);
+        return $this->showOne($user, 200);
     }
 
     public function destroy($id)
     {
         $user = $this->user->delete($id);
 
-        return response()->json(['data' => $user], 200);
+        // return response()->json(['data' => $user], 200);
+        return $this->showOne($user, 200);
     }
 }

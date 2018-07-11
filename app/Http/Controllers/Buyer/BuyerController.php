@@ -17,14 +17,16 @@ class BuyerController extends ApiController
     {
         $buyers = $this->buyer->getAll();
 
-        return response()->json(['data' => $buyers], 200);
+        //return response()->json(['data' => $buyers], 200);
+        return $this->showAll($buyers, 200);
     }
 
     public function show($id)
     {
         $buyer = $this->buyer->getBuyer($id);
 
-        return response()->json(['data' => $buyer], 200);
+        //return response()->json(['data' => $buyer], 200);
+        return $this->showOne($buyer);
     }
 
     
