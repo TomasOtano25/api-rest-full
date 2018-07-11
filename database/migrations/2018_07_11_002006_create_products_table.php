@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use App\Product;
 
 class CreateProductsTable extends Migration
 {
@@ -17,11 +18,13 @@ class CreateProductsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->text('description');
-            $table->integer('quantity');
-            $table->boolean('status');
-            $table->integer('seller');
-            $table->integer('transactions');
+            $table->integer('quantity')->unsigned(); // numero sin signo (es decir positivo)
+            $table->string('status')->default(Product::PRODUCTO_NO_DISPONIBLE);
+            $table->string('image');
+            $table->integer('seller_id')->unsigned();
             $table->timestamps();
+
+            $table->foreign('seller_id')->references('id')->on('users');
         });
 
        
