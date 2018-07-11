@@ -10,7 +10,23 @@ class UserRepository
         return User::all();
     } 
 
-    public function findOrFail($id) {
+    public function getUser($id) {
         return User::findOrFail($id);
     }
+
+    public function create($fields) {
+        return User::create($fields);
+    }
+
+    public function update() {
+
+    }
+
+    public function delete($id) {
+        $user = $this->getUse($id);
+        $user->delete();
+        return $user;
+    }
+
+    
 }

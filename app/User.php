@@ -38,6 +38,22 @@ class User extends Authenticatable
         'verification_token'
     ];
 
+    // Mutadores y accesores
+    /* Mutadores */
+    public function setNameAttribute($value) {
+        $this->attributes['name'] = strtolower($value);
+    }
+
+    public function setEmailAttribute($value) {
+        $this->attributes['email'] = strtolower($value);
+    }
+
+    /* Accesores */
+    public function getNameAttribute($value) {
+        //return ucfirst($valor);
+        return ucwords($value);
+    }
+
     public function isVerified() {
         return $this->verified == User::USUARIO_VERIFICADO;
     }
