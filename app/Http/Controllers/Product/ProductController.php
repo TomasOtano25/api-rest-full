@@ -5,13 +5,16 @@ namespace App\Http\Controllers\Product;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Product;
-use App\Http\Repositories\DbProductRepository;
+use App\Repositories\Product\ProductRepositoryInterface;
 
 class ProductController extends Controller
 {
+    /**
+     * @var App\Repositories\ProductRepository
+     */
     protected $product;
 
-    public function __construct(DbProductRepository $product)
+    public function __construct(ProductRepositoryInterface $product)
     {
         $this->product = $product;
     }
@@ -22,8 +25,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::all();
-
+        // $products = Product::all();
+        $products = $this->product->getAll();
         return $products;
     }
 
@@ -56,7 +59,7 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        $product = Product::find($id);
+        $product = $this->product->find($id);
 
         return $product;
     }
