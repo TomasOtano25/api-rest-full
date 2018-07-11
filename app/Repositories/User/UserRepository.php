@@ -10,7 +10,7 @@ class UserRepository
         return User::all();
     } 
 
-    public function find($id) {
-        return User::find($id);
+    public function findOrFail($id) {
+        return User::findOrFail($id);
     }
 }
