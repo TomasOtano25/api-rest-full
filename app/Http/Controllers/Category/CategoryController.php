@@ -46,7 +46,6 @@ class CategoryController extends ApiController
 
     public function update(Request $request, Category $category)
     {
-        
     }
 
     public function destroy(Category $category)

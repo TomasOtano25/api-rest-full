@@ -36,13 +36,14 @@ class UserController extends ApiController
 
         $this->validate($request, $rules);
         
-        $fields = $request->all();
-        $fields['password'] = bcrypt($request->password);
-        $fields['verified'] = User::USUARIO_NO_VERIFICADO;
-        $fields['verification_token'] = User::generateVerificationToken();
-        $fields['admin'] = User::USUARIO_REGULAR;
+        // $fields = $request->all();
+        // $fields['password'] = bcrypt($request->password);
+        // $fields['verified'] = User::USUARIO_NO_VERIFICADO;
+        // $fields['verification_token'] = User::generateVerificationToken();
+        // $fields['admin'] = User::USUARIO_REGULAR;
 
-        $user = $this->user->create($fields);
+        // $user = $this->user->create($fields);
+        $user = $this->user->create($request);
 
         //return response()->json(['data' => $user], 201);
         return $this->showOne($user, 201);
