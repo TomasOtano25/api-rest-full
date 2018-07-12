@@ -23,7 +23,7 @@ class UserRepository
     }
 
     public function delete($id) {
-        $user = $this->getUse($id);
+        $user = $this->getUser($id);
         $user->delete();
         return $user;
     }

@@ -34,6 +34,8 @@ php artisan migrate:refresh --seed
 - 201 Creado 
 - 409 Error al actualizar
 - 422 No hubo cambios en el intento de actualizacion
+- 409 Conflicto
+- 500 Error interno del servidor
 
 ## Mutadores y accesores
 
@@ -51,3 +53,8 @@ Se encuentran el momento antes de que mostremos un dato extraido de una base de 
     use api-rest-full;
     select name, email from users;
 ```
+
+## Establer un controllador padre que maneje los demas controller
+
+> El nombre de este controlador es `ApiController` y se encarga de establecer una capaca de abstraccion en la que 
+establezco la diferencie entre los controlladores de la Api y los controladores genericos
