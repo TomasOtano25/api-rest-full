@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Seller;
 use Illuminate\Http\Request;
 use App\Repositories\Seller\SellerRepository;
 use App\Http\Controllers\ApiController;
+use App\Seller;
 
 class SellerController extends ApiController
 {
@@ -22,11 +23,12 @@ class SellerController extends ApiController
         return response()->json(['data' => $sellers], 200); 
     }
 
-    public function show($id)
+    // public function show($id)
+    public function show(Seller $seller)
     {
-        $seller = $this->seller->getSeller($id);
-
-        return response()->json(['data' => $seller], 200);
+        // $seller = $this->seller->getSeller($id);
+        return $this->showOne($seller);
+        // return response()->json(['data' => $seller], 200);
     }
 
 }

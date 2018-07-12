@@ -52,9 +52,18 @@ Se encuentran el momento antes de que mostremos un dato extraido de una base de 
 ```sql
     use api-rest-full;
     select name, email from users;
+
+    describe nombreTable;
 ```
 
 ## Establer un controllador padre que maneje los demas controller
 
 > El nombre de este controlador es `ApiController` y se encarga de establecer una capaca de abstraccion en la que 
 establezco la diferencie entre los controlladores de la Api y los controladores genericos
+
+## Uso de global Scope
+
+
+## Utilizacion de soft deleting (eliminacion suave)
+
+> Nos permite ocultar elementos de la tabla en lugar de eliminarlos correctamentes 

@@ -10,7 +10,7 @@ class BuyerRepository
        return Buyer::has('transactions')->get();
     }
 
-    public function getBuyer($id) {
-        return Buyer::has('transactions')->findOrFail($id);
-    }
+    // public function getBuyer($id) {
+    //     return Buyer::has('transactions')->findOrFail($id);
+    // }
 }

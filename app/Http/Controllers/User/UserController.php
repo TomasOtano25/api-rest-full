@@ -14,11 +14,7 @@ class UserController extends ApiController
     public function __construct(UserRepository $user) {
         $this->user = $user;
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function index()
     {
         $users = $this->user->getAll();
@@ -29,13 +25,6 @@ class UserController extends ApiController
 
     }
 
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         // rules: contraseña con lo menos 6 caracteres y contraseña confirmada
@@ -59,30 +48,17 @@ class UserController extends ApiController
         return $this->showOne($user, 201);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    // public function show($id)
+    public function show(User $user)
     {
-        $user = $this->user->getUser($id);
-        
+        //$user = $this->user->getUser($id);
         //return response()->json(['data' => $user], 200);
-        return $this->showOne($user, 200);
+        return $this->showOne($user);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
-        $user = $this->user->getUser($id);
+        //$user = $this->user->getUser($id);
 
         $rules = [
             'email'=> 'email|unique:users,email,' . $user->id, //comprueba el email menos el del usuario actual
@@ -122,9 +98,10 @@ class UserController extends ApiController
         return $this->showOne($user, 200);
     }
 
-    public function destroy($id)
+    //public function destroy($id)
+    public function destroy(User $user)
     {
-        $user = $this->user->delete($id);
+        $user = $this->user->delete($user);
 
         // return response()->json(['data' => $user], 200);
         return $this->showOne($user, 200);

@@ -11,7 +11,7 @@ class SellerRepository
         return Seller::has('products')->get();
     }
 
-    public function getSeller($id) {
-        return Seller::has('products')->findOrFail($id);
-    }
+    // public function getSeller($id) {
+    //     return Seller::has('products')->findOrFail($id);
+    // }
 }

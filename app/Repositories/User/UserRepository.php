@@ -10,10 +10,6 @@ class UserRepository
         return User::all();
     } 
 
-    public function getUser($id) {
-        return User::findOrFail($id);
-    }
-
     public function create($fields) {
         return User::create($fields);
     }
@@ -22,8 +18,7 @@ class UserRepository
 
     }
 
-    public function delete($id) {
-        $user = $this->getUser($id);
+    public function delete(User $user) {
         $user->delete();
         return $user;
     }
