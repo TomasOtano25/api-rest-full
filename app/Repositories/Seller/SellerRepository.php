@@ -2,7 +2,7 @@
 
 namespace App\Repositories\Seller;
 
-use App\Seller;
+use App\Models\Seller;
 
 
 class SellerRepository

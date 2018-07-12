@@ -10,4 +10,6 @@ class Model extends Eloquent
     use SoftDeletes;
 
     protected $dates = ['deleted_at']; // Propiedad relacionada con el SoftDeletes
+    
+    // protected $guarded = [];
 }

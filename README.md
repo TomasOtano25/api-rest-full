@@ -67,3 +67,7 @@ establezco la diferencie entre los controlladores de la Api y los controladores 
 ## Utilizacion de soft deleting (eliminacion suave)
 
 > Nos permite ocultar elementos de la tabla en lugar de eliminarlos correctamentes 
+
+## Creacion de controller con recursos e inyeccion de modelos
+
+ php artisan make:controller Category/CategoryController -r -m Models/Category
