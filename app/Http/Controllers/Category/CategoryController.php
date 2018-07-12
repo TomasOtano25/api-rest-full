@@ -46,6 +46,18 @@ class CategoryController extends ApiController
 
     public function update(Request $request, Category $category)
     {
+
+        $category = $this->category->update($request, $category);
+        
+        // isDirty Si la instancia cambio
+        // isClean Si la instancia no cambio
+        if($category->isClean()) {
+            return $this->errorResponse('Debe de especificar al menos un valor diferente para actualizar', 422);
+        }
+
+        $this->category->save($category);
+
+        return $this->showOne($category);
     }
 
     public function destroy(Category $category)

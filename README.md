@@ -71,3 +71,9 @@ establezco la diferencie entre los controlladores de la Api y los controladores 
 ## Creacion de controller con recursos e inyeccion de modelos
 
  php artisan make:controller Category/CategoryController -r -m Models/Category
+
+
+ ## Obtener las categorias de una transaccion especifica
+ ## Operaciones complejas
+
+ php artisan make:controller Transaction/TransactionCategoryController -r -m Models/Transaction

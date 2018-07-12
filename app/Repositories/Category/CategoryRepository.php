@@ -20,6 +20,17 @@ class CategoryRepository
         ]);
     }
 
+    public function update(Request $request, Category $category) {
+        return $category->fill($request->only([
+            'name',
+            'description'
+        ]));
+    }
+
+    public function save(Category $category) {
+        return $category->save();
+    }
+
     public function delete(Category $category) 
     {
         $category->delete();
