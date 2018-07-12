@@ -1,10 +1,9 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use App\Scopes\SellerScope;
  
-
 class Seller extends User
 {
     protected static function boot() 

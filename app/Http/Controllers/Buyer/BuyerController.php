@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Buyer;
 use Illuminate\Http\Request;
 use App\Repositories\Buyer\BuyerRepository;
 use App\Http\Controllers\ApiController;
-use App\Buyer;
+use App\Models\Buyer;
 
 class BuyerController extends ApiController
 {

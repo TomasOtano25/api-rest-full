@@ -1,11 +1,11 @@
 <?php
 
 use Faker\Generator as Faker;
-use App\User;
-use App\Product;
-use App\Category;
-use App\Transaction;
-use App\Seller;
+use App\Models\User;
+use App\Models\Product;
+use App\Models\Category;
+use App\Models\Transaction;
+use App\Models\Seller;
 
 $factory->define(User::class, function (Faker $faker) {
     return [

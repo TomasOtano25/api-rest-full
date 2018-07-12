@@ -2,7 +2,7 @@
 
 namespace App\Repositories\Buyer;
 
-use App\Buyer;
+use App\Models\Buyer;
 
 class BuyerRepository 
 {

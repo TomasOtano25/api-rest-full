@@ -1,11 +1,11 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Product;
-use App\Category;
+use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Support\Facades\DB;
-use App\User;
-use App\Transaction;
+use App\Models\User;
+use App\Models\Transaction;
 
 class DatabaseSeeder extends Seeder
 {

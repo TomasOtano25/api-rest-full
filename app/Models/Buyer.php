@@ -1,9 +1,8 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use App\Scopes\BuyerScope;
-
 
 class Buyer extends User
 {
