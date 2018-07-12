@@ -19,6 +19,8 @@ class User extends Authenticatable
 
     protected $table = 'users'; // Debido a la herencia de seller y buyer
 
+    protected $dates = ['deleted_at']; // Atributo tratado como fecha
+
     protected $fillable = [
         'name', 
         'email', 

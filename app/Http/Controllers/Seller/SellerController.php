@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Seller;
 use Illuminate\Http\Request;
 use App\Repositories\Seller\SellerRepository;
 use App\Http\Controllers\ApiController;
-use App\Seller;
+use App\Models\Seller;
 
 class SellerController extends ApiController
 {
