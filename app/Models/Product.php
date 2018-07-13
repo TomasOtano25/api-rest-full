@@ -16,6 +16,11 @@ class Product extends Model
         'seller_id'
     ];
 
+    /* Motivo: me permite eliminar la tabla pivot de mis consultas */
+    protected $hidden = [
+        'pivot'
+    ];
+
     public function isAvaible() {
         return $this->status == Product::PRODUCTO_DISPONIBLE;
     }
