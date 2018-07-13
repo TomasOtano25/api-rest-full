@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
 use App;
+use App\Models\Product;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -16,6 +17,15 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         // Schema::defaultStringLength(191);
+
+        // Manejar el cambio del estado de una producto debido a la cantidad disponible
+        Product::updated( function ($product) {
+            if($product->quantity == 0 && $product->isAvaible()) {
+                $product->status = Product::PRODUCTO_NO_DISPONIBLE;
+                
+                $product->save();
+            }
+        });
     }
 
     /**
