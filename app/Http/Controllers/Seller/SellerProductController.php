@@ -8,6 +8,7 @@ use App\Http\Controllers\ApiController;
 use App\Models\User;
 use App\Models\Product;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Illuminate\Support\Facades\Storage;
 
 class SellerProductController extends ApiController
 {
@@ -31,7 +32,10 @@ class SellerProductController extends ApiController
 
         $data = $request->all();
         $data['status'] = Product::PRODUCTO_NO_DISPONIBLE;
-        $data['image'] = '1.jpg';
+        // $data['image'] = '1.jpg';
+        // ubicacion , sistema de archivos
+        // estblece el nombre de la imagen solo
+        $data['image'] = $request->image->store('');
         $data['seller_id'] = $seller->id;
         
         $product = Product::create($data);
@@ -70,6 +74,10 @@ class SellerProductController extends ApiController
                 return $this->errorResponse('Un producto activo debe de tener al menos una categoria.', 409);
             }
         }
+        if($request->hasFile('image')) {
+            Storage::delete($product->image);
+            $product->image = $request->image->store('');
+        }
 
         if($product->isClean()) {
             return $this->errorResponse('Se debe de especificar por lo menos un valor diferente para actualizar.', 422);
@@ -84,6 +92,8 @@ class SellerProductController extends ApiController
     public function destroy(Seller $seller, Product $product)
     {
         $this->verifySeller($seller, $product);
+
+        Storage::delete($product->image);
 
         $product->delete();
 
