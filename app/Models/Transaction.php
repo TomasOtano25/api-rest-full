@@ -2,6 +2,9 @@
 
 namespace App\Models;
 
+use App\Transformers\TransactionTransformer;
+
+
 class Transaction extends Model
 {
     protected $fillable = [
@@ -9,6 +12,9 @@ class Transaction extends Model
         'buyer_id',
         'product_id'
     ];
+
+    //Transformer
+    public $transformer = TransactionTransformer::class;
 
     public function product() {
         return $this->belongsTo(Product::class);

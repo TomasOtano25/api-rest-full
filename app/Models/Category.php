@@ -2,6 +2,9 @@
 
 namespace App\Models;
 
+use App\Transformers\CategoryTransformer;
+
+
 class Category extends Model
 {
     protected $fillable = [
@@ -13,6 +16,9 @@ class Category extends Model
     protected $hidden = [
         'pivot'
     ];
+
+    // Transformer
+    public $transformer = CategoryTransformer::class;
     
     public function products() {
         return $this->belongsToMany(Product::class);

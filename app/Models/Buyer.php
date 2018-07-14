@@ -6,6 +6,9 @@ use App\Scopes\BuyerScope;
 
 class Buyer extends User
 {
+    // Transformer
+    public $transformer = BuyerTransfomer::class;
+     
     // El metodo a continuacion es el metodo Boot que se encarga de permitirme usar los Scope globalse
     protected static function boot() 
     {

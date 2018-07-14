@@ -2,6 +2,9 @@
 
 namespace App\Models;
 
+use App\Transformers\ProductTransformer;
+
+
 class Product extends Model
 {
     const PRODUCTO_DISPONIBLE = 'disponible';
@@ -20,6 +23,9 @@ class Product extends Model
     protected $hidden = [
         'pivot'
     ];
+
+    // Transformer
+    public $transformer = ProductTransformer::class;
 
     public function isAvaible() {
         return $this->status == Product::PRODUCTO_DISPONIBLE;

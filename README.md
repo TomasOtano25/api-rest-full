@@ -95,3 +95,20 @@ establezco la diferencie entre los controlladores de la Api y los controladores 
  php artisan make:mail UserCreated
 
  Establecer eventos
+
+ ## Middleware
+
+ Se encarga de la authentication
+
+ - php artisan make:middleware SignatureMiddlware
+
+ X-RateLimit-Limit →60 (cantidad de peticiones en un minuto)
+ X-RateLimit-Remaining →59 (cuantas peticiones me quedan en un minuto)
+
+ Formato Unit
+
+ ## Transformaciones
+
+ `composer require spatie/laraver-fractal`
+
+ php artisan make:transformer
