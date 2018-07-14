@@ -6,7 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Repositories\User\UserRepository;
 use App\Http\Controllers\ApiController;
-
+use Illuminate\Support\Facades\Mail;
+use App\Mail\UserCreated;
 
 class UserController extends ApiController
 {
@@ -82,7 +83,7 @@ class UserController extends ApiController
         }
         if($request->has('admin')) {
             if(!$user->isVerified()) {
-                return $this->errorReponse('Unicamente los usuarios verificados pueden cambiar su valor de administrador', 409);
+                return $this->errorResponse('Unicamente los usuarios verificados pueden cambiar su valor de administrador', 409);
                 // return response()->json(['error' => 'Unicamente los usuarios verificados pueden cambiar su valor de administrador', 'code'=> 409], 409);
             }
             $user->admin = $request->admin;
@@ -106,5 +107,31 @@ class UserController extends ApiController
 
         // return response()->json(['data' => $user], 200);
         return $this->showOne($user, 200);
+    }
+
+    public function verify($token) 
+    {
+        $user = User::where('verification_token', $token)->firstOrFail();
+
+        $user->verified = User::USUARIO_VERIFICADO;
+        $user->verification_token = null;
+
+        $user->save();
+
+        return $this->showMessage('La cuenta ha sido verificada.', 422);
+
+    }
+
+    public function resend(User $user) 
+    {
+        if($user->isVerified()) {
+            $this->errorResponse('Este usuario ya ha sido veridicado.', 409);
+        }
+
+        retry(5, function () use ($user) {
+            Mail::to($user)->send(new UserCreated($user));
+        }, 100);
+
+        return $this->showMessage('El correo de verificacion se ha reenviado.');
     }
 }

@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+
         // $this->call(UsersTableSeeder::class);
         DB::statement('SET FOREIGN_KEY_CHECKS = 0'); // EL fin de esta linea es que no se verifiquen las claves foreign
         User::truncate(); // Eliminar los elementos de las tablas
@@ -23,6 +24,13 @@ class DatabaseSeeder extends Seeder
         Product::truncate();
         Transaction::truncate();
         DB::table('category_product')->truncate();
+
+        /* Desactivar los eventos debidos a los envios de email */
+
+        User::flushEventListeners();
+        Product::flushEventListeners();
+        Category::flushEventListeners();
+        Transaction::flushEventListeners();
 
         $quantityUsers = 1000;
         $quantityCategories = 30;

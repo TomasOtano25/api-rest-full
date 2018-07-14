@@ -23,5 +23,9 @@ trait ApiResponser //
     protected function showOne(Model $instance, $code = 200) { // valor por defecto 200
         return response()->json(['data' => $instance], $code);
     }
+
+    protected function showMessage($message, $code = 200) {
+        return response()->json(['data' => $message], $code);
+    }
 }
 

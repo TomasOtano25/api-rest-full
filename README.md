@@ -77,3 +77,21 @@ establezco la diferencie entre los controlladores de la Api y los controladores 
  ## Operaciones complejas
 
  php artisan make:controller Transaction/TransactionCategoryController -r -m Models/Transaction
+
+
+ ## Manejo de email
+
+ - Install
+
+ ```
+ - mailgun
+ - sparkpost
+ ```
+
+ > composer require guzzlehttp/guzzle
+
+ ## Mailable
+
+ php artisan make:mail UserCreated
+
+ Establecer eventos
