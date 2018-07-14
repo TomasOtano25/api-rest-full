@@ -23,6 +23,11 @@ trait ApiResponser //
         }
 
         $transformer = $collection->first()->transformer;
+
+        $collection = $this->filterData($collection, $transformer);
+
+        $collection = $this->sortData($collection, $transformer);
+
         $collection = $this->transformData($collection, $transformer);
 
         // return response()->json(['data' => $collection], $code);
@@ -46,6 +51,31 @@ trait ApiResponser //
         $transformation = fractal($data, new $transformer);
 
         return $transformation->toArray();
+    }
+
+
+    protected function sortData(Collection $collection, $transformer) 
+    {
+        if(request()->has('sort_by')) {
+            $attribure = $transformer::originalAttribute(request()->sort_by);
+            $collection = $collection->sortBy($attribure);
+            // $collection = $collection->sortBy->{$attribute};
+        }
+
+        return $collection;
+    }
+
+    protected function filterData(Collection $collection, $transformer) 
+    {
+        foreach (request()->query() as $query => $value) {
+            $attribute = $transformer::originalAttribute($query);
+
+            if(isset($attribute, $value)) {
+                $collection = $collection->where($attribute, $value);
+            }
+        }
+
+        return $collection;
     }
 }
 

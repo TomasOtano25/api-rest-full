@@ -112,3 +112,7 @@ establezco la diferencie entre los controlladores de la Api y los controladores 
  `composer require spatie/laraver-fractal`
 
  php artisan make:transformer
+
+ ## Ordenando la informacion 
+
+ - Parametro `sort_by`
