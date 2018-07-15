@@ -5,7 +5,7 @@ namespace App\Transformers;
 use League\Fractal\TransformerAbstract;
 use App\Models\Product;
 
-class ProductTransformer extends TransformerAbstract
+class ProductTransformer extends TransformerAbstract implements TransformerInterface
 {
     /**
      * A Fractal transformer.
@@ -37,6 +37,23 @@ class ProductTransformer extends TransformerAbstract
             'status' => 'status',
             'image' => 'image',
             'seller' => 'seller_id',
+            'created_at' => 'created_at',
+            'updated_at' => 'updated_at',
+            'deleted_at' => 'deleted_at'
+        ];
+
+        return isset($attributes[$index]) ? $attributes[$index] : null;
+    }
+
+    public static function transformedAttribute($index) {
+        $attributes = [
+            'id' => 'identifier' ,
+            'name' => 'title',
+            'description' => 'details',
+            'quantity'=> 'available',
+            'status' => 'status',
+            'image' => 'image',
+            'seller_id' => 'seller',
             'created_at' => 'created_at',
             'updated_at' => 'updated_at',
             'deleted_at' => 'deleted_at'

@@ -8,11 +8,15 @@ use App\Repositories\User\UserRepository;
 use App\Http\Controllers\ApiController;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\UserCreated;
+use App\Transformers\UserTransformer;
 
 class UserController extends ApiController
 {
     protected $user;
-    public function __construct(UserRepository $user) {
+    public function __construct(UserRepository $user) 
+    {
+        parent::__construct();
+        $this->middleware('transform.input:' . UserTransformer::class)->only(['store', 'update']);
         $this->user = $user;
     }
     

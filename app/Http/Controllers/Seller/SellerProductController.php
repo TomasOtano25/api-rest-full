@@ -9,9 +9,16 @@ use App\Models\User;
 use App\Models\Product;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Illuminate\Support\Facades\Storage;
+use App\Transformers\ProductTransformer;
 
 class SellerProductController extends ApiController
 {
+    public function __construct()
+    {
+        parent::__construct();
+        $this->middleware('transform.input:' . ProductTransformer::class)->only(['store', 'update']);
+    }
+
     public function index(Seller $seller)
     {
         $products = $seller->products;

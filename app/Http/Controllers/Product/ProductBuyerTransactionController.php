@@ -8,9 +8,15 @@ use App\Http\Controllers\ApiController;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use App\Models\Transaction;
+use App\Transformers\TransactionTransformer;
 
 class ProductBuyerTransactionController extends ApiController
 {
+    public function __construct()
+    {
+        parent::__construct();
+        $this->middleware('transform.input:' . TransactionTransformer::class)->only('store');
+    }
     public function store(Request $request, Product $product, User $buyer) 
     {
         $rules = [

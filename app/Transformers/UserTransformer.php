@@ -5,7 +5,7 @@ namespace App\Transformers;
 use League\Fractal\TransformerAbstract;
 use App\Models\User;
 
-class UserTransformer extends TransformerAbstract
+class UserTransformer extends TransformerAbstract implements TransformerInterface
 {
     /**
      * A Fractal transformer.
@@ -39,5 +39,20 @@ class UserTransformer extends TransformerAbstract
         ];
 
         return isset($attributes[$index]) ? $attributes[$index] : null;
+    }
+
+    public static function transformedAttribute($index) {
+        $attributes = [
+            'id' => 'identifier',
+            'name' => 'name',
+            'email' => 'email',
+            'verified' => 'isVerified',
+            'admin' => 'isAdmin',
+            'created_at' => 'created_at',
+            'updated_at' => 'updated_at',
+            'deleted_at' => 'deleted_at'
+        ];
+
+        return isset($attributes[$index]) ? $attributes[$index]: null;
     }
 }

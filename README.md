@@ -116,3 +116,7 @@ establezco la diferencie entre los controlladores de la Api y los controladores 
  ## Ordenando la informacion 
 
  - Parametro `sort_by`
+
+ ## Establecer cache
+
+    
