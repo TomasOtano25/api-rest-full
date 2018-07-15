@@ -5,17 +5,20 @@ namespace App\Http\Controllers\Category;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\ApiController;
+use App\Repositories\Category\CategoryRepository;
 
 class CategorySellerController extends ApiController
 {
+    protected $category;
+
+    public function __construct(CategoryRepository $category)
+    {
+        $this->category = $category;
+    }
+
     public function index(Category $category)
     {
-        $sellers = $category->products() //iglerlogin   
-            ->with('seller')
-            ->get()
-            ->pluck('seller')
-            ->unique('id')
-            ->values();
+        $sellers = $this->category->getCategorySellers($category);
 
         return $this->showAll($sellers);
     }

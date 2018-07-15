@@ -5,18 +5,20 @@ namespace App\Http\Controllers\Buyer;
 use App\Models\Buyer;
 use Illuminate\Http\Request;
 use App\Http\Controllers\ApiController;
+use App\Repositories\Buyer\BuyerRepository;
 
 class BuyerCategoryController extends ApiController
 {
+    protected $buyer;
+
+    public function __construct(BuyerRepository $buyer) 
+    {
+        $this->buyer = $buyer;
+    }
+
     public function index(Buyer $buyer)
     {
-        $categories = $buyer->transactions()
-            ->with('product.categories')
-            ->get()
-            ->pluck('product.categories')
-            ->collapse() // se encarga de unir las listas
-            ->unique('id')
-            ->values();
+        $categories = $this->buyer->getBuyerCategories();
 
         return $this->showAll($categories);
     }

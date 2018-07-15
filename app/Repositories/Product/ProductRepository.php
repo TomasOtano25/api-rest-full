@@ -7,11 +7,25 @@ use App\Models\Product;
 
 class ProductRepository implements ProductRepositoryInterface  
 {
-    public function getAll() {
+    public function getAll() 
+    {
         return Product::all();
     }
 
-    public function find($id) {
+    public function find($id) 
+    {
         return Product::findOrFail($id);
+    }
+
+    public function getProductBuyers(Product $product) 
+    {
+        $buyers = $product->transactions()
+            ->with('buyer')
+            ->get()
+            ->pluck('buyer')
+            ->unique('id')
+            ->values();
+
+        return $buyers;
     }
 }

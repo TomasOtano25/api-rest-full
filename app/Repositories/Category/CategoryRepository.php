@@ -36,4 +36,48 @@ class CategoryRepository
         $category->delete();
         return $category;
     }
+
+    public function getCategoryBuyers(Category $category) 
+    {
+        $buyers = $category->products()
+            ->whereHas('transactions')
+            ->with('transactions.buyer')
+            ->get()
+            ->pluck('transactions')
+            ->collapse()
+            ->pluck('buyer')
+            ->unique()
+            ->values();
+        
+        return $buyers;
+    }
+
+    public function getCategoryProducts(Category $category) 
+    {
+        return $category->products;
+    }
+
+    public function getCategorySellers(Category $category) 
+    {
+        $sellers = $category->products() //iglerlogin   
+            ->with('seller')
+            ->get()
+            ->pluck('seller')
+            ->unique('id')
+            ->values();
+
+        return $sellers;
+    }
+
+    public function getCategoryTransactions(Category $category) 
+    {
+        $transactions = $category->products()
+            ->whereHas('transactions')
+            ->with('transactions')
+            ->get()
+            ->pluck('transactions')
+            ->collapse();
+
+        return $transactions;
+    }
 }

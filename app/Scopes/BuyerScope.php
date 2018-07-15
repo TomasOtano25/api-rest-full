@@ -5,6 +5,7 @@ namespace App\Scopes;
 use Illuminate\Database\Eloquent\Scope;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
+use App\Models\Buyer;
 
 class BuyerScope implements Scope 
 {
