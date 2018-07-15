@@ -118,4 +118,9 @@ class Handler extends ExceptionHandler
     {
         return $this->errorResponse('No autenticado', 401);
     }
+
+    private function isFrontend($request) 
+    {
+        // return $request->acceptsHtml() && 
+    }
 }

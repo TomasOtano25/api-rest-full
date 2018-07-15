@@ -119,4 +119,11 @@ establezco la diferencie entre los controlladores de la Api y los controladores 
 
  ## Establecer cache
 
-    
+
+## Creaccion del middleware TransformInput
+
+php artisan make:middleware TransfomrInput
+
+## Añadiendo authenticacion
+
+php artisan make:auth
