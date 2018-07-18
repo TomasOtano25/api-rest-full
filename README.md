@@ -127,3 +127,31 @@ php artisan make:middleware TransfomrInput
 ## Añadiendo authenticacion
 
 php artisan make:auth
+
+## OAuth2
+
+composer require laravel/passport
+install provider
+php artisan migrate --seed
+php artisan passport:install
+
+php artisan route:list
+
+> Agregando las client_credentials: se encargara de todos los usuarios de la aplicacion tengan acceso a la informacion
+
+php artisan passport:client
+
+Crear cliente (obligatorio)
+
+php artisan passport:client --Password
+
+
+php artisan vendor:publish --tag=passport-components
+
+npm install
+
+php artisan passport:client --personal
+
+http://homestead.test/oauth/authorize?client_id=3&redirect_url=http://homestead.test&response_type=code
+
+** https://meyerweb.com/eric/tools/dencoder/ **

@@ -12,6 +12,8 @@ class BuyerController extends ApiController
     protected $buyer;
     public function __construct(BuyerRepository $buyer) 
     {
+        parent::__construct();
+        
         $this->buyer = $buyer;
     }
 

@@ -16,6 +16,11 @@ class ProductController extends ApiController
 
     public function __construct(ProductRepositoryInterface $product)
     {
+        $this->middleware('client.credentials')->only([
+            'index',
+            'show'
+        ]);
+        
         $this->product = $product;
     }
 

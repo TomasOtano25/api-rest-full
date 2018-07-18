@@ -13,6 +13,8 @@ class CategoryProductController extends ApiController
 
     public function __construct(CategoryRepository $category)
     {
+        $this->middleware('client.credentials')->only('index');
+        
         $this->category = $category;
     }
 

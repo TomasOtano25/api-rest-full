@@ -10,6 +10,12 @@ use App\Transformers\CategoryTransformer;
 
 class ProductCategoryController extends ApiController
 {
+    public function __construct()
+    {
+        $this->middleware('auth:api')->except('index');
+        $this->middleware('client.credentials')->only('index');
+    }
+
     public function index(Product $product)
     {
         $categories = $product->categories;

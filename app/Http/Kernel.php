@@ -42,7 +42,7 @@ class Kernel extends HttpKernel
             'signature:X-Application-Name',
             'throttle:60,1', // middleware relacionado con las limitaciones de peticiones de un cliente
             // primer parametro: numero maximo de peticiones por minuto
-            'bindings'
+            'bindings',
         ],
     ];
 
@@ -65,6 +65,7 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         /* */
         'signature' => \App\Http\Middleware\SignatureMiddleware::class,
-        'transform.input' => \App\Http\Middleware\TransformInput::class
+        'transform.input' => \App\Http\Middleware\TransformInput::class,
+        'client.credentials' => \Laravel\Passport\Http\Middleware\CheckClientCredentials::class
     ];
 }

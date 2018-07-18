@@ -13,6 +13,9 @@ class SellerController extends ApiController
 
     public function __construct(SellerRepository $seller)
     {
+        parent::__construct();
+        
+        $this->middleware('client_credentials');
         $this->seller = $seller;
     }
     

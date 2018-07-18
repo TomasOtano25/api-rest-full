@@ -13,6 +13,8 @@ class CategoryTransactionController extends ApiController
 
     public function __construct(CategoryRepository $category)
     {
+        parent::__construct();
+
         $this->category = $category;
     }
 

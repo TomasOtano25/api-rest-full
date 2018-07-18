@@ -13,6 +13,8 @@ class TransactionController extends ApiController
 
     public function __construct(TransactionRepository $transaction)
     {  
+        parent::__construct();
+        // $this->middleware('auth:api')->only(['index', 'show']);
         $this->transaction = $transaction;
     }
 
