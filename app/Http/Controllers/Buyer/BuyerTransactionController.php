@@ -13,6 +13,8 @@ class BuyerTransactionController extends ApiController
 
     public function __construct(BuyerRepository $buyer)
     {
+        $this->middleware('scope:read-general')->only('index');
+
         $this->buyer = $buyer;
     }
 

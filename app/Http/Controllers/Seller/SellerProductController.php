@@ -10,6 +10,7 @@ use App\Models\Product;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Illuminate\Support\Facades\Storage;
 use App\Transformers\ProductTransformer;
+use Illuminate\Auth\AuthenticationException;
 
 class SellerProductController extends ApiController
 {
@@ -18,13 +19,20 @@ class SellerProductController extends ApiController
         parent::__construct();
         
         $this->middleware('transform.input:' . ProductTransformer::class)->only(['store', 'update']);
+
+        // Scope
+        $this->middleware('scope:manage-products')->except('index');
     }
 
     public function index(Seller $seller)
     {
-        $products = $seller->products;
+        if(request()->user()->tokenCan('read-general') || request()->user()->tokenCan('manage-products')) {
+            $products = $seller->products;
 
-        return $this->showAll($products);
+            return $this->showAll($products);
+        }
+        
+        throw new AuthenticationException();
     }
 
     public function store(Request $request, User $seller)

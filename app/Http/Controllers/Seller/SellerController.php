@@ -16,6 +16,8 @@ class SellerController extends ApiController
         parent::__construct();
         
         $this->middleware('client_credentials');
+
+        $this->middleware('scope:read-general')->only('show');
         $this->seller = $seller;
     }
     

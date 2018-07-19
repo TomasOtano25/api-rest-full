@@ -12,6 +12,8 @@ class SellerCategoryController extends ApiController
     {
         parent::__construct();
         
+        $this->middleware('scope:read-general')->only('index');
+
         $this->middleware('client_credentials');
     }
 

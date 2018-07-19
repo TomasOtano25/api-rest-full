@@ -66,6 +66,10 @@ class Kernel extends HttpKernel
         /* */
         'signature' => \App\Http\Middleware\SignatureMiddleware::class,
         'transform.input' => \App\Http\Middleware\TransformInput::class,
-        'client.credentials' => \Laravel\Passport\Http\Middleware\CheckClientCredentials::class
+        'client.credentials' => \Laravel\Passport\Http\Middleware\CheckClientCredentials::class,
+        // Verifica que el accessToken esta haciendo uso de uno de los scopes definidos
+        'scope' => \Laravel\Passport\Http\Middleware\CheckForAnyScope::class,
+        // Todos son verificados para ese accessToken
+        'scopes' => \Laravel\Passport\Http\Middleware\CheckScopes::class
     ];
 }

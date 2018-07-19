@@ -40,5 +40,13 @@ class AuthServiceProvider extends ServiceProvider
         // Opcional
         Passport::enableImplicitGrant();
 
+        /* Scopes */
+        Passport::tokensCan([
+            'purchase-product' => 'Crear transacciones para comprar productos determinados',
+            'manage-products' => 'Crear, Ver, Actualizar y Eliminar productos',
+            'manage-account' => 'Obtener la informacion de la cuenta, nombre, email, estado (sin contraseña), modificar datos como el email, nombre y contraseña. No puede eliminar la cuenta.',
+            'read-general' => 'Obtener informacion general, categoria donde se compra y se vende, productos vendidos o comprados, transacciones, compras y ventas'  
+        ]);
+
     }
 }

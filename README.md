@@ -155,3 +155,11 @@ php artisan passport:client --personal
 http://homestead.test/oauth/authorize?client_id=3&redirect_url=http://homestead.test&response_type=code
 
 ** https://meyerweb.com/eric/tools/dencoder/ **
+
+
+http://homestead.test/oauth/authorize?client_id=3&redirect_uri=http://localhost/auth/callback&response_type=token
+
+
+## Realizacion de los scope
+
+El `*` lo puedo utilizar en las llamas scope para solicitar todos los scope (permisos).
