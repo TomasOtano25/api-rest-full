@@ -37,6 +37,8 @@ class CategoryController extends ApiController
     
     public function store(Request $request)
     {
+        $this->allowedAdminAction();
+
         $rules = [
             'name' => 'required',
             'description' => 'required'
@@ -58,6 +60,8 @@ class CategoryController extends ApiController
     public function update(Request $request, Category $category)
     {
 
+        $this->allowedAdminAction();
+
         $category = $this->category->update($request, $category);
         
         // isDirty Si la instancia cambio
@@ -73,6 +77,8 @@ class CategoryController extends ApiController
 
     public function destroy(Category $category)
     {
+        $this->allowedAdminAction();
+        
         $category = $this->category->delete($category);
 
         return $this->showOne($category);;

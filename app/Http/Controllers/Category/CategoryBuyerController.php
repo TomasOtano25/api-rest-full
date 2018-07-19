@@ -18,6 +18,9 @@ class CategoryBuyerController extends ApiController
 
     public function index(Category $category)
     {
+
+        $this->allowedAdminAction();
+
         $buyers = $this->category->getCategoryBuyers($category);
 
         return $this->showAll($buyers);

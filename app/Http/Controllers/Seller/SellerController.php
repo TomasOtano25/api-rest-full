@@ -15,14 +15,19 @@ class SellerController extends ApiController
     {
         parent::__construct();
         
-        $this->middleware('client_credentials');
+        // $this->middleware('client_credentials');
 
         $this->middleware('scope:read-general')->only('show');
+
+        $this->middleware('can:view,seller')->only('show');
+
         $this->seller = $seller;
     }
     
     public function index()
     {
+        $this->allowedAdminAction();
+
         $sellers = $this->seller->getAll();
 
         return response()->json(['data' => $sellers], 200); 

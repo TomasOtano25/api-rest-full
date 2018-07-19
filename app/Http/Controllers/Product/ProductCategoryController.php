@@ -13,9 +13,14 @@ class ProductCategoryController extends ApiController
     public function __construct()
     {
         $this->middleware('auth:api')->except('index');
+        
         $this->middleware('client.credentials')->only('index');
 
         $this-> middleware('scope:manage-products')->except('index');
+
+        $this->middleware('can:add-category,product')->only('update');
+
+        $this->middleware('can:delete-category,product')->only('destroy');
     }
 
     public function index(Product $product)
@@ -30,7 +35,8 @@ class ProductCategoryController extends ApiController
         // sync, attach, syncWithoutDetaching (relaciones muchos a muchos)
         $product->categories()->syncWithoutDetaching([$category->id]);
 
-        return $product->categories;
+        return $this->showAll($product->categories);
+        // return $product->categories;
     }
 
     public function destroy(Product $product, Category $category) 

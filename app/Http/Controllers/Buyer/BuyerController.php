@@ -15,11 +15,16 @@ class BuyerController extends ApiController
         parent::__construct();
         
         $this->middleware('scope:read-general')->only('show');
+
+        $this->middleware('can:view,buyer')->only('show');
         $this->buyer = $buyer;
     }
 
     public function index()
     {
+        // Gate: para bloqueo de administrador
+        $this->allowedAdminAction();
+
         $buyers = $this->buyer->getAll();
 
         //return response()->json(['data' => $buyers], 200);

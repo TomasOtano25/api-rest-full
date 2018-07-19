@@ -22,11 +22,17 @@ class UserController extends ApiController
         $this->middleware('transform.input:' . UserTransformer::class)->only(['store', 'update']);
 
         $this->middleware('scope:manage-account')->only(['show', 'update']);
+
+        $this->middleware('can:view,user')->only('show');
+        $this->middleware('can:update,user')->only('update');
+        $this->middleware('can:delete,user')->only('destroy');
         $this->user = $user;
     }
     
     public function index()
     {
+        $this->allowedAdminAction();
+
         $users = $this->user->getAll();
         //$users = User::all();
         //return $users;
@@ -91,6 +97,9 @@ class UserController extends ApiController
             $user->password = bcrypt($request->password);
         }
         if($request->has('admin')) {
+
+            $this->allowedAdminAction();
+            
             if(!$user->isVerified()) {
                 return $this->errorResponse('Unicamente los usuarios verificados pueden cambiar su valor de administrador', 409);
                 // return response()->json(['error' => 'Unicamente los usuarios verificados pueden cambiar su valor de administrador', 'code'=> 409], 409);

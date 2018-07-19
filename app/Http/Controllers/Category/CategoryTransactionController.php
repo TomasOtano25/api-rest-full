@@ -20,6 +20,8 @@ class CategoryTransactionController extends ApiController
 
     public function index(Category $category)
     {
+        $this->allowedAdminAction();
+        
         $transactions = $this->category->getCategoryTransactions($category);
 
         return $this->showAll($transactions);

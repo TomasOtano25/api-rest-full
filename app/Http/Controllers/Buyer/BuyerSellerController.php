@@ -20,6 +20,8 @@ class BuyerSellerController extends ApiController
 
     public function index(Buyer $buyer)
     {
+        $this->allowedAdminAction();
+
         $sellers = $this->buyer->getBuyerSellers($buyer);
             
         return $this->showAll($sellers);

@@ -163,3 +163,9 @@ http://homestead.test/oauth/authorize?client_id=3&redirect_uri=http://localhost/
 ## Realizacion de los scope
 
 El `*` lo puedo utilizar en las llamas scope para solicitar todos los scope (permisos).
+
+## Policies y Gates (Ultima capa de seguridad) (se encarga de los usuarios)
+
+authentication laravel
+
+php artisan make:policy SellerPolicy --model=Models/Seller

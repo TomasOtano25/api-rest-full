@@ -22,11 +22,18 @@ class SellerProductController extends ApiController
 
         // Scope
         $this->middleware('scope:manage-products')->except('index');
+
+        $this->middleware('can:view,seller')->only('index');
+        $this->middleware('can:sale,seller')->only('store');
+        $this->middleware('can:edit-product,seller')->only('update');
+        $this->middleware('can:delete-product,seller')->only('destroy');
+
     }
 
     public function index(Seller $seller)
     {
         if(request()->user()->tokenCan('read-general') || request()->user()->tokenCan('manage-products')) {
+            
             $products = $seller->products;
 
             return $this->showAll($products);

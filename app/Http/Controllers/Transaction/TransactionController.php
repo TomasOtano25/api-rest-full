@@ -16,11 +16,16 @@ class TransactionController extends ApiController
         parent::__construct();
         // $this->middleware('auth:api')->only(['index', 'show']);
         $this->middleware('scope:read-general')->only('show');
+
+        $this->middleware('can:view,transaction')->only('show');
+        
         $this->transaction = $transaction;
     }
 
     public function index()
     {
+        $this->allowedAdminAction();
+
         $transactions = $this->transaction->getAll();
 
         return $this->showAll($transactions);

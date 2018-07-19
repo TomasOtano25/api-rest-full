@@ -16,6 +16,8 @@ class BuyerCategoryController extends ApiController
         parent::__construct();
         
         $this->middleware('scope:read-general')->only('index');
+        // function, recurso(modelo) | instancia de buyer
+        $this->middleware('can:view,buyer')->only('index');
 
         $this->buyer = $buyer;
     }
