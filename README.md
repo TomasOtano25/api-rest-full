@@ -169,3 +169,9 @@ El `*` lo puedo utilizar en las llamas scope para solicitar todos los scope (per
 authentication laravel
 
 php artisan make:policy SellerPolicy --model=Models/Seller
+
+## CORS
+
+[](https://github.com/barryvdh/laravel-cors)
+
+composer require barryvdb/laravel-cors

@@ -13,6 +13,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Illuminate\Database\QueryException;
+use Asm89\Stack\CorsService;
 
 class Handler extends ExceptionHandler
 {
@@ -58,6 +59,54 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        // if($exception instanceof ValidationException) {
+        //     return $this->convertValidationExceptionToResponse($exception, $request);
+        // }
+
+        // if($exception instanceof ModelNotFoundException) {
+        //     $model = strtolower(class_basename($exception->getModel()));
+        //     return $this->errorResponse('No existe ninguna instancia de '.$model.' con el id especificado.', 404);
+        // }
+
+        // if($exception instanceof AuthenticationException) {
+        //     return $this->unauthenticated($request, $exception);
+        // }
+
+        // if($exception instanceof AuthorizationException) {
+        //     return $this->errorResponse('No posee los permisos para ejecutar esta accion.', 403);
+        // }
+
+        // if($exception instanceof NotFoundHttpException) {
+        //     return $this->errorResponse('No se encontro la URL especificada.', 404);
+        // }
+        // if($exception instanceof MethodNotAllowedHttpException) {
+        //     return $this->errorResponse('El metodo especificado en la peticion no es valido.', 405);
+        // }
+        // if($exception instanceof HttpException) {
+        //     return $this->errorResponse($exception->getMessage(), $exception->getStatusCode());
+        // }
+        // if($exception instanceof QueryException) {
+        //     $code = $exception->errorInfo[1];
+        //     if ($code == 1451) {
+        //         return $this->errorResponse('No se puede eliminar de forma permanente el recurso porque esta relacionado con algun otro.', 409);
+        //     }
+        // }
+
+        // if(config('app.debug')) {
+        //     return parent::render($request, $exception);
+        // }
+        
+        // return $this->errorResponse('Falla inesperada. Intente Luego.', 500);
+
+        $response = $this->handleException($request, $exception);
+
+        app(CorsService::class)->addActualRequestHeaders($response, $request);
+
+        return $response;
+    }
+
+    protected function handleException($request, Exception $exception) 
+    {
         if($exception instanceof ValidationException) {
             return $this->convertValidationExceptionToResponse($exception, $request);
         }
@@ -96,8 +145,6 @@ class Handler extends ExceptionHandler
         }
         
         return $this->errorResponse('Falla inesperada. Intente Luego.', 500);
-
-        
     }
 
     /**

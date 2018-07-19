@@ -39,6 +39,7 @@ class Kernel extends HttpKernel
         ],
 
         'api' => [
+            'cors',
             'signature:X-Application-Name',
             'throttle:60,1', // middleware relacionado con las limitaciones de peticiones de un cliente
             // primer parametro: numero maximo de peticiones por minuto
@@ -70,6 +71,8 @@ class Kernel extends HttpKernel
         // Verifica que el accessToken esta haciendo uso de uno de los scopes definidos
         'scope' => \Laravel\Passport\Http\Middleware\CheckForAnyScope::class,
         // Todos son verificados para ese accessToken
-        'scopes' => \Laravel\Passport\Http\Middleware\CheckScopes::class
+        'scopes' => \Laravel\Passport\Http\Middleware\CheckScopes::class,
+
+        'cors' => \Barryvdh\Cors\HandleCors::class
     ];
 }
